@@ -1,0 +1,22 @@
+# Single-node Redpanda for the streaming path: `make redpanda-up`, then `make kafka-check`.
+# Without Docker the same processor runs on the embedded append-only log in cablewatch/bus.py.
+services:
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v26.1.2
+    container_name: cablewatch-redpanda
+    command:
+      - redpanda
+      - start
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+      - --rpc-addr redpanda:33145
+      - --advertise-rpc-addr redpanda:33145
+      - --mode dev-container
+      - --smp 1
+    ports:
+      - "19092:19092"
+      - "19644:9644"
+    volumes:
+      - redpanda-data:/var/lib/redpanda/data
+volumes:
+  redpanda-data:

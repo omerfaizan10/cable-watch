@@ -1,0 +1,55 @@
+{
+ "fetched_utc": "2026-11-15T18:44:27+00:00",
+ "source": "OpenStreetMap contributors, ODbL 1.0, via api.openstreetmap.org",
+ "ways": [
+  {
+   "type": "way",
+   "id": 168326669,
+   "tags": {
+    "cables": "3",
+    "frequency": "50",
+    "location": "underwater",
+    "name": "Bornholm Cable",
+    "power": "cable",
+    "rating": "60 MW",
+    "seamark:cable_submarine:category": "power",
+    "seamark:type": "cable_submarine",
+    "voltage": "60000",
+    "wikidata": "Q893982",
+    "wikipedia": "sv:Bornholmskabeln"
+   },
+   "version": 4,
+   "geometry": [
+    {
+     "lat": 55.4298084,
+     "lon": 14.2333256
+    },
+    {
+     "lat": 55.4194444,
+     "lon": 14.2602778
+    },
+    {
+     "lat": 55.3783333,
+     "lon": 14.3422222
+    },
+    {
+     "lat": 55.3544444,
+     "lon": 14.3688889
+    },
+    {
+     "lat": 55.2705556,
+     "lon": 14.4661111
+    },
+    {
+     "lat": 55.1775,
+     "lon": 14.6644444
+    },
+    {
+     "lat": 55.1732131,
+     "lon": 14.7052761
+    }
+   ],
+   "why": "Bornholm Cable, Sweden to Bornholm (missing from EMODnet)"
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{
+  "fetched_utc": "2026-11-14T12:23:48+00:00",
+  "wfs": "https://ows.emodnet-humanactivities.eu/wfs",
+  "bbox": [
+    9.0,
+    53.0,
+    31.0,
+    66.5
+  ],
+  "license": "CC BY 4.0, EMODnet Human Activities, originator Cogea Srl",
+  "layers": [
+    {
+      "layer": "emodnet:bshcontiscables",
+      "http_status": 200,
+      "features_in_bbox": 12
+    },
+    {
+      "layer": "emodnet:cicacables",
+      "http_status": 200,
+      "features_in_bbox": 0
+    },
+    {
+      "layer": "emodnet:maltacables",
+      "http_status": 200,
+      "features_in_bbox": 0
+    },
+    {
+      "layer": "emodnet:pcablesbshcontis",
+      "http_status": 200,
+      "features_in_bbox": 20
+    },
+    {
+      "layer": "emodnet:pcablesnve",
+      "http_status": 200,
+      "features_in_bbox": 269
+    },
+    {
+      "layer": "emodnet:pcablesshom",
+      "http_status": 200,
+      "features_in_bbox": 0
+    },
+    {
+      "layer": "emodnet:pipelines",
+      "http_status": 200,
+      "features_in_bbox": 520
+    },
+    {
+      "layer": "emodnet:shomcables",
+      "http_status": 200,
+      "features_in_bbox": 0
+    },
+    {
+      "layer": "emodnet:sigcables",
+      "http_status": 200,
+      "features_in_bbox": 0
+    },
+    {
+      "layer": "emodnet:ukfibrecables",
+      "http_status": 200,
+      "features_in_bbox": 0
+    }
+  ]
+}

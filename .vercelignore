@@ -1,0 +1,9 @@
+# Vercel builds web/ only; never upload the local data folders.
+/data/
+/.venv/
+/cablewatch/
+/tests/
+/scripts/
+/.pytest_cache/
+/web/node_modules/
+/web/.next/

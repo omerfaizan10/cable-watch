@@ -17,3 +17,5 @@ data/reference/emodnet_cables_raw.geojson
 data/*.log
 data/reference/osm_tiles/
 *.partial
+.vercel
+.env*.local

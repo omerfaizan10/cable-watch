@@ -125,6 +125,19 @@ def export_replay(spec: dict, index) -> dict:
             "audit": proc.audit()}
 
 
+def _runs_in_backtest(runs: dict) -> dict:
+    """Only the days the backtest evaluated, so every count on the site describes the
+    same set of days even if more runs finished after the backtest."""
+    p = WAREHOUSE / "backtest.json"
+    if not p.exists():
+        return {k: v for k, v in runs.items() if not k.startswith("kafka_")}
+    bt = json.loads(p.read_text())
+    days = {r["day"] for r in bt["normal_days"] if r.get("gated") and r.get("agnostic")}
+    from .backtest import INCIDENT_FILES
+    days |= {d for files in INCIDENT_FILES.values() for d in files}
+    return {k: v for k, v in runs.items() if k.split("_", 1)[1] in days and not k.startswith("kafka_")}
+
+
 def _live() -> dict | None:
     p = WAREHOUSE / "live_check.json"
     if not p.exists():
@@ -164,7 +177,7 @@ def main() -> None:
         "correctness": json.loads((WAREHOUSE / "correctness.json").read_text()) if (WAREHOUSE / "correctness.json").exists() else None,
         "live": _live(),
         "kafka": json.loads((WAREHOUSE / "kafka_check.json").read_text()) if (WAREHOUSE / "kafka_check.json").exists() else None,
-        "runs": {k: v for k, v in runs.items() if not k.startswith("kafka_")},
+        "runs": _runs_in_backtest(runs),
         "replays": replays,
     }
     (OUT / "scorecard.json").write_text(json.dumps(score, separators=(",", ":"), default=str))

@@ -184,8 +184,12 @@ def main() -> None:
         kw = ASSET_KEYWORDS.get(iid, [])
         asset_routes = [n for n in names if any(k in n.lower() for k in kw)]
         r = {"incident_id": iid, "damage_utc": inc["damage_utc"], "time_precision": inc["time_precision"],
-             "asset": inc["asset"], "vessel": inc["vessel_name"], "imo": inc["imo"],
-             "reported_mmsi": inc["mmsi"], "asset_routes_in_emodnet": asset_routes}
+             "asset": inc["asset"], "asset_type": inc["asset_type"], "between": inc["between"].replace(";", ", "),
+             "vessel": inc["vessel_name"], "imo": inc["imo"], "reported_mmsi": inc["mmsi"],
+             "identifier_notes": inc["identifier_notes"], "location_notes": inc["location_notes"],
+             "status_notes": inc["status_notes"],
+             "sources": [u.strip() for u in inc["sources"].split("|") if u.strip()],
+             "asset_routes_in_emodnet": asset_routes}
         if day > ARCHIVE_LAST_DAY:
             r.update(status="not_in_archive", reason=f"DMA archive ends {ARCHIVE_LAST_DAY}")
         elif iid not in INCIDENT_FILES:
@@ -250,8 +254,10 @@ def main() -> None:
                          "distinct_mmsi_accepted": None}
         normal.append(row)
 
+    # Both modes are summarised over the same days (those with both runs), so the
+    # mapped-cables and whole-sea figures are a like-for-like comparison.
     def summary(mode):
-        vals = [r[mode]["alerts"] for r in normal if r.get(mode) and not r["tuning_day"]]
+        vals = [r[mode]["alerts"] for r in normal if r.get("gated") and r.get("agnostic") and not r["tuning_day"]]
         if not vals:
             return None
         v = sorted(vals)

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import Link from "next/link";
 import { utc } from "@/lib/format";
 
 const STATUS: Record<string, string> = {
@@ -67,7 +68,7 @@ export default function Scorecard({
               <th>Reported damage</th>
               <th>Asset</th>
               <th>Vessel</th>
-              <th>Route in EMODnet</th>
+              <th>Route on the map</th>
               <th>DMA verdict</th>
               <th>Cable-gated rules</th>
               <th>Cable-agnostic rules</th>
@@ -86,7 +87,9 @@ export default function Scorecard({
                       : r.time_precision}
                   </div>
                 </td>
-                <td>{r.asset}</td>
+                <td>
+                  <Link href={`/incidents/${r.incident_id}/`}>{r.asset.split(" (")[0]}</Link>
+                </td>
                 <td>
                   {r.vessel || <span className="tiny">none named</span>}
                   {r.ais?.mmsis?.length ? (

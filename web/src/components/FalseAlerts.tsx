@@ -27,7 +27,7 @@ export default function FalseAlerts({ score }: { score: any }) {
         <p className="lede">Not measured yet: the normal-day runs are missing.</p>
       </section>
     );
-  const days: any[] = bt.normal_days.filter((d: any) => d.gated).sort((a: any, b: any) => a.day.localeCompare(b.day));
+  const days: any[] = bt.normal_days.filter((d: any) => d.gated && d.agnostic).sort((a: any, b: any) => a.day.localeCompare(b.day));
   const fa = bt.false_alerts_per_day;
   const held = days.filter((d) => !d.tuning_day);
   const g = fa?.gated;

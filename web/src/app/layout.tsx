@@ -6,6 +6,7 @@ import "@fontsource/public-sans/600.css";
 import "@fontsource/public-sans/700.css";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import Masthead from "@/components/Masthead";
 import { AUTHOR, SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <Masthead />
         {children}
         <Footer />
       </body>

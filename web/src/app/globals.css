@@ -921,3 +921,132 @@ details.tech p {
 .findings > li {
   min-width: 0;
 }
+
+/* ---- multi-page report: contents, page heads, previous/next ---- */
+.page-head h1 {
+  max-width: 30ch;
+}
+.page-head .kicker a {
+  color: inherit;
+}
+.contents {
+  list-style: none;
+  margin: 8px 0 18px;
+  padding: 0;
+}
+.contents li {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 220px;
+  gap: 12px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+.contents li:first-child {
+  border-top: 2px solid var(--ink);
+}
+.c-num {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink-3);
+}
+.contents a {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+.contents a:hover {
+  text-decoration: underline;
+}
+.contents p {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  max-width: 64ch;
+}
+.c-fact {
+  text-align: right;
+  font-size: 13.5px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 34px 0 8px;
+}
+.page-nav a {
+  display: grid;
+  gap: 2px;
+  min-width: 200px;
+  padding: 12px 14px;
+  border: 1px solid var(--rule-2);
+  color: var(--ink);
+  text-decoration: none;
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  background: var(--paper);
+}
+.page-nav a:hover {
+  border-color: var(--ink);
+}
+.page-nav a span {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.page-nav .next {
+  text-align: right;
+  margin-left: auto;
+}
+.plain-list {
+  padding-left: 20px;
+  max-width: 72ch;
+}
+.plain-list li {
+  margin-bottom: 10px;
+}
+.sources-list {
+  padding-left: 22px;
+  columns: 2;
+  column-gap: 32px;
+  max-width: 760px;
+}
+.sources-list li {
+  margin-bottom: 4px;
+  break-inside: avoid;
+}
+.verdict.ok {
+  color: var(--alert);
+  font-weight: 700;
+}
+@media (max-width: 760px) {
+  .contents li {
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+  .c-fact {
+    grid-column: 2;
+    text-align: left;
+  }
+  .page-nav {
+    flex-direction: column;
+  }
+  .page-nav a {
+    min-width: 0;
+  }
+  .sources-list {
+    columns: 1;
+  }
+}
+
+/* The home page is the report's front matter: its blocks are not numbered chapters. */
+.report.home .section > h2::before {
+  content: none;
+}

@@ -2,17 +2,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AUTHOR } from "@/lib/site";
+import { CHAPTERS } from "@/components/PageNav";
 
-const NAV = [
-  { href: "/", label: "Report" },
-  { href: "/#replay", label: "Replay" },
-  { href: "/how-it-works/", label: "How it works" },
-];
+const NAV = CHAPTERS.map((c) => ({ href: c.href, label: c.short }));
 
-export default function Masthead({ built }: { built?: string }) {
+export default function Masthead() {
   const path = usePathname() || "/";
   const active = (href: string) =>
-    href === "/" ? path === "/" : !href.startsWith("/#") && path.startsWith(href.replace(/\/$/, ""));
+    href === "/" ? path === "/" : path.startsWith(href.replace(/\/$/, ""));
   return (
     <header className="masthead">
       <div className="wrap mast-inner">
@@ -31,7 +28,6 @@ export default function Masthead({ built }: { built?: string }) {
         ))}
       </nav>
       <div className="mast-right">
-        {built && <span className="built">data built {built}</span>}
         <a href={AUTHOR.url} className="byline" rel="author">
           Built by <span>{AUTHOR.name}</span>
         </a>

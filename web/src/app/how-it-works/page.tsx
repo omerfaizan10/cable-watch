@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageNav from "@/components/PageNav";
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
-import Masthead from "@/components/Masthead";
 import Architecture from "@/components/Architecture";
 import { SpeedDrop, SlowDwell, DragSignature, RepeatCrossing } from "@/components/RuleSketches";
 
@@ -36,10 +36,9 @@ export default function HowItWorks() {
   const east = load("coverage.json")?.east_limit_lon_1000_fixes_per_day ?? 18.6;
   return (
     <>
-      <Masthead built={score ? score.generated_utc.slice(0, 10) : undefined} />
       <main className="wrap explainer">
         <header className="ex-head">
-          <p className="kicker">How it works</p>
+          <p className="kicker">Section 7 · How it works</p>
           <h1>Watching ships over the cables under the Baltic</h1>
           <p className="ex-lede">
             Power lines and internet cables run along the floor of the Baltic
@@ -234,6 +233,7 @@ export default function HowItWorks() {
             </p>
           </div>
         </section>
+        <PageNav current="/how-it-works/" />
       </main>
     </>
   );

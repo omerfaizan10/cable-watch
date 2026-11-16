@@ -29,7 +29,7 @@ export default function Method({ score }: { score: any }) {
   ];
   return (
     <section className="section" id="method">
-      <h2>Method</h2>
+      <h2>Rules and thresholds</h2>
       <p className="lede">
         Every threshold below is read from the same config file the processor
         uses, so the page cannot drift from the code. The defaults come from

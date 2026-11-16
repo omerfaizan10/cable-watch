@@ -1,17 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const W = 720;
-const LEFT = 150;
+const LEFT = 186;
 const RIGHT = 24;
 const ROW = 22;
 
-export default function OutageLookup({ score }: { score: any }) {
+export default function OutageLookup({
+  score,
+  only,
+  title = "Who was over the cable when it failed?",
+}: {
+  score: any;
+  only?: string;
+  title?: string;
+}) {
   const inc: any[] = score?.backtest?.incidents ?? [];
-  const cases = inc.filter((r) => r.outage_lookup?.candidates);
+  const cases = inc.filter((r) => r.outage_lookup?.candidates && (!only || r.incident_id === only));
   if (!cases.length) return null;
   return (
     <section className="section" id="outage-lookup">
-      <h2>Who was over the cable when it failed?</h2>
+      <h2>{title}</h2>
       {cases.map((r) => {
         const ol = r.outage_lookup;
         const top: any[] = ol.top;
@@ -21,9 +29,11 @@ export default function OutageLookup({ score }: { score: any }) {
         const named = top.find((c) => c.rank === ol.named_vessel_rank);
         return (
           <div key={r.incident_id} className="ol-case">
-            <h3>
-              {r.asset.split(" (")[0]}, {r.damage_utc.slice(0, 10)}
-            </h3>
+            {!only && (
+              <h3>
+                {r.asset.split(" (")[0]}, {r.damage_utc.slice(0, 10)}
+              </h3>
+            )}
             <p className="lede">
               {named ? (
                 <>

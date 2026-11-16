@@ -11,10 +11,11 @@ export default function Intro({ score }: { score: any }) {
   const fa = bt?.false_alerts_per_day;
   const det = score?.correctness?.determinism ?? [];
   const rows = score?.correctness?.rows;
-  const runs = Object.entries(score?.runs ?? {}).filter(([k]) => k.startsWith("gated_"));
+  const all = score?.runs ?? {};
+  const runs = Object.entries(all).filter(([k]) => k.startsWith("gated_") && all[`agnostic_${k.slice(6)}`]);
   const nDays = runs.length;
   const nRows = runs.reduce((a, [, v]: [string, any]) => a + (v.raw_in ?? 0), 0);
-  const normal: string[] = (bt?.normal_days ?? []).filter((d: any) => !d.tuning_day).map((d: any) => d.day).sort();
+  const normal: string[] = (bt?.normal_days ?? []).filter((d: any) => !d.tuning_day && d.gated && d.agnostic).map((d: any) => d.day).sort();
   const span = normal.length ? `${normal[0].slice(0, 7)} to ${normal[normal.length - 1].slice(0, 7)}` : "";
   const findings: Finding[] = [];
   if (ol?.named_vessel_rank)
